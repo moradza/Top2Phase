@@ -1,4 +1,26 @@
-# Top2Phase
+# Topological Phase Calssification of Water
+
+This package (Top2Phase) implements the graph neural network for classificaiton of water phases, it constructes graphs based on the positioanal information of neighboring water molecules obtained from molecular dynamics trajectories and train graph neural network model to classify these phase using only edge information.
+
+For further information see following paper.
+[Top2Phase](https://doi.org)
+
+![](images/image.png)
+
+## Table of Contents
+
+- [How to cite](#how-to-cite)
+- [Installation](#Installation)
+- [Usage](#usage)
+  - [Trajectory to Graph](#MD-Data-Processing)
+  - [Training](#training-the-model)
+  - [Analysis using gradient](#Saliency-Map)
+  - [Analysis using masking](#masking-Explaination)
+  - [Visualize the results](#visualize-the-results)
+- [Data](#data)
+- [Authors](#authors)
+- [License](#license)
+
 Topological Classification of Water Phases Using Edge-Conditioned Convolutional Graph Neural Network  
 
 
@@ -21,11 +43,11 @@ Python codes are located in the src/. directory:
   
   ```
   ### Requirment
-    tensorflow >= 2.1 
+    [tensorflow >= 2.1](https://www.tensorflow.or)
     spektral >= 1.0.4 
     pyboo  
-    pymatgen 
-    tqdm 
+    [pymatgen](http://pymatgen.org)
+    [tqdm](https://tqdm.github.io)
 ## Usage
 
 ### Trajectory to Graph
