@@ -13,7 +13,7 @@ For further information see following paper.
 - [Installation](#Installation)
 - [Usage](#usage)
   - [Trajectory to Graph](#MD-Data-Processing)
-  - [Training](#Graph Neural network training)
+  - [Training](#Graph-neural-network-training)
   - [Analysis using gradient](#Saliency-Map)
   - [Analysis using masking](#masking-Explaination)
   - [Visualize the results](#visualize-the-results)
@@ -54,7 +54,7 @@ Python codes are located in the src/. directory:
 
 
 
-### Graph Neural network training
+### Graph Neural Network Training
 ```
 python main.py -h
 usage: ECCConv net training  for phase classification [-h]
