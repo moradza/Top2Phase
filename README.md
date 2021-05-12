@@ -13,7 +13,7 @@ For further information see following paper.
 - [Installation](#Installation)
 - [Usage](#usage)
   - [Trajectory to Graph](#MD-Data-Processing)
-  - [Training](#training-the-model)
+  - [Training](#Graph Neural network training)
   - [Analysis using gradient](#Saliency-Map)
   - [Analysis using masking](#masking-Explaination)
   - [Visualize the results](#visualize-the-results)
