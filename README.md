@@ -1,3 +1,5 @@
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1gmbuRjqVyFf2GVFChpxTK0rfGk0-qeXk#scrollTo=lr52_g1b-Eyz)
+
 # Topological Phase Calssification of Water
 
 This package (Top2Phase) implements the graph neural network for classificaiton of water phases, it constructes graphs based on the positioanal information of neighboring water molecules obtained from molecular dynamics trajectories and train graph neural network model to classify these phase using only edge information.
