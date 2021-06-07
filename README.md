@@ -1,4 +1,3 @@
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1gmbuRjqVyFf2GVFChpxTK0rfGk0-qeXk#scrollTo=lr52_g1b-Eyz)
 
 # Topological Phase Calssification of Water
 
