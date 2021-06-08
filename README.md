@@ -28,20 +28,20 @@ Topological Classification of Water Phases Using Edge-Conditioned Convolutional 
 Python codes are located in the src/. directory:
 
 
-1. convert_traj_to_graph.py : graphical user interface supports user interface and communication between various codes
-2. ulities.py: 
-3. utility.py : kernele ridge regression is implemented for MAVELP dataset and used for fitting, prediction and score, additionally it supports optimization
-4. model.py : neural network model for classificaiton is implemented. 
-5. main.py : training of the network model for classificaiton is done in this part. 
+1. compute_orderparameters.py: calculate order parameters from md trajectory
+2. compute_pairwisedistance.py: computes pairwise distance for all atoms within a cut-off distance 
+3. utility.py: codes to support other python scriipts for reading and managing dataset including graphs for graph neural network and md trajectory for preprocessing
+4. model.py: graph neural network model functional API
+5. Top2Phase.py: neural network model for classificaiton is implemented. 
+6. main.py : training of the network model for classificaiton and model evaluation 
 
 ## Installation
-  We recommend installaiton of following packages for experimentation with this code, preferabely all in a conda enviroment
+  We recommend installaiton of following packages with this code, preferabely all in a conda enviroment
   ```
   conda create -n top2phase python=3.6 tensorflow pymatgen tqdm -c anaconda -c conda-forge
   source activate top2phase 
   pip install pyboo
   pip install spektral==1.0.4
-  
   ```
   ### Requirment
     [tensorflow >= 2.1](https://www.tensorflow.or)
@@ -52,6 +52,7 @@ Python codes are located in the src/. directory:
 ## Usage
 
 ### Trajectory to Graph
+
 
 
 
