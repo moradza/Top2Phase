@@ -44,11 +44,11 @@ Python codes are located in the src/. directory:
   pip install spektral==1.0.4
   ```
   ### Requirment
-   [tensorflow >= 2.1](https://www.tensorflow.org)
-   [spektral >= 1.0.4](https://graphneural.network)
-   [pyboo](https://pyboo.readthedocs.io/en/latest/index.html) 
-   [pymatgen](http://pymatgen.org)
-   [tqdm](https://tqdm.github.io)
+   [tensorflow >= 2.1](https://www.tensorflow.org)<br>
+   [spektral >= 1.0.4](https://graphneural.network)<br>
+   [pyboo](https://pyboo.readthedocs.io/en/latest/index.html) <br>
+   [pymatgen](http://pymatgen.org)<br>
+   [tqdm](https://tqdm.github.io)<br>
 ## Usage
 
 ### Trajectory to Graph
