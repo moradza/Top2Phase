@@ -1,6 +1,5 @@
 import pathlib
-from setuptools
-import setup, find_packages
+from setuptools import setup, find_packages
 
 HERE = pathlib.Path(__file__).parent
 
@@ -33,7 +32,8 @@ setup(name=PACKAGE_NAME,
       author_email=AUTHOR_EMAIL,
       url=URL,
       install_requires=INSTALL_REQUIRES,
-      packages=find_packages(),
-      entry_points ={'console_scripts': [ 'top2phase = main', 'compute_ops = compute_orderparameters',  'compute_pwdist = compute_pairwisedistance' ]},
+      package_dir={'': 'src'},
+      packages=find_packages(where='src'),
+      entry_points ={'console_scripts': [ 'top2phase = Top2Phase.main:main' ]},
       python_requires='>3.5',
       )
