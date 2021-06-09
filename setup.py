@@ -34,6 +34,6 @@ setup(name=PACKAGE_NAME,
       install_requires=INSTALL_REQUIRES,
       package_dir={'': 'src'},
       packages=find_packages(where='src'),
-      entry_points ={'console_scripts': [ 'top2phase = Top2Phase.main:main' ]},
+      entry_points ={'console_scripts': [ 'top2phase = Top2Phase.main:main','orderparms= Top2Phase.compute_orderprameters:main', 'pwdist=Top2Phase.compute_pairwisedistance:main'  ]},
       python_requires='>3.5',
       )
