@@ -44,7 +44,7 @@ Python codes are located in the src/. directory:
   pip install spektral==1.0.4
   git clone https://github.com/moradza/Top2Phase.git
   cd Top2Phase
-  pip3 install .
+  pip3 install . # add user if you don't have user privilage --user 
   ```
   ### Requirment
    [tensorflow >= 2.1](https://www.tensorflow.org)<br>
