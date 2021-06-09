@@ -42,6 +42,9 @@ Python codes are located in the src/. directory:
   source activate top2phase 
   pip install pyboo
   pip install spektral==1.0.4
+  git clone https://github.com/moradza/Top2Phase.git
+  cd Top2Phase
+  pip3 install .
   ```
   ### Requirment
    [tensorflow >= 2.1](https://www.tensorflow.org)<br>
@@ -49,12 +52,13 @@ Python codes are located in the src/. directory:
    [pyboo](https://pyboo.readthedocs.io/en/latest/index.html) <br>
    [pymatgen](http://pymatgen.org)<br>
    [tqdm](https://tqdm.github.io)<br>
+   [mdtraj](https://mdtraj.org/1.9.3/index.html)<br>
 ## Usage
 
 ### Trajectory to Graph
 
 ```
- python compute_pairwisedistance.py -h
+ pwdist -h
 usage: The traj.xtc convertor to npz [-h] [--xtc_file XTC_FILE]
                                      [--gro_file GRO_FILE]
                                      [--npz_file NPZ_FILE] [--radius RADIUS]
@@ -71,7 +75,7 @@ optional arguments:
 
 
 ```
- python compute_orderparameters.py -h
+ orderparms -h
 usage: The traj.xtc convertor to order parameter npz [-h] [--xtc_file XTC_FILE]
                                      [--gro_file GRO_FILE]
                                      [--npz_file NPZ_FILE] [--radius RADIUS]
@@ -89,9 +93,9 @@ optional arguments:
 
 *Example*
 ```
- for i in $(seq 1 31); do python compute_pairwisedistance.py --xtc_file Iceh_vapor/temp_${i}_short.xtc  --gro_file Iceh_vapor/conf.gro --radius 0.60 --npz_file graph_Icehvapor_0.60_${i}.npz; done
+ for i in $(seq 1 31); do pwdist --xtc_file Iceh_vapor/temp_${i}_short.xtc  --gro_file Iceh_vapor/conf.gro --radius 0.60 --npz_file graph_Icehvapor_0.60_${i}.npz; done
  
-  for i in $(seq 1 31); do python compute_orderparameters.py --xtc_file Iceh_vapor/temp_${i}_short.xtc  --gro_file Iceh_vapor/conf.gro --radius 0.60 --npz_file OP_Icehvapor_0.60_${i}.npz; done
+  for i in $(seq 1 31); do orderparms --xtc_file Iceh_vapor/temp_${i}_short.xtc  --gro_file Iceh_vapor/conf.gro --radius 0.60 --npz_file OP_Icehvapor_0.60_${i}.npz; done
 ```
 
 
