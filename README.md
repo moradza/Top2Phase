@@ -68,9 +68,20 @@ usage: ECCConv net training  for phase classification [-h]
                                                       [--data_path DATA_PATH]
                                                       [--random_seed RANDOM_SEED]
                                                       [--split_fraction SPLIT_FRACTION]
-                                                      [--savemodel SAVEMODEL]
-                                                      [--save_freq SAVE_FREQ]
+                                                      [--save_model_dir SAVE_MODEL_DIR]
                                                       [--list_of_phases LIST_OF_PHASES [LIST_OF_PHASES ...]]
+                                                      [--save_loss_freq SAVE_LOSS_FREQ]
+                                                      [--save_model_freq SAVE_MODEL_FREQ]
+                                                      [--max_save MAX_SAVE]
+                                                      [--show_loss SHOW_LOSS]
+                                                      [--use_bias USE_BIAS]
+                                                      [--size_factor SIZE_FACTOR]
+                                                      [--kernel_network KERNEL_NETWORK [KERNEL_NETWORK ...]]
+                                                      [--ecc_layers ECC_LAYERS]
+                                                      [--pool_type POOL_TYPE]
+                                                      [--activation ACTIVATION]
+                                                      [--mlp_layers MLP_LAYERS]
+                                                      [--log_name LOG_NAME]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -90,16 +101,41 @@ optional arguments:
                         random seed for consistent training
   --split_fraction SPLIT_FRACTION
                         fraction of data for validation
-  --savemodel SAVEMODEL
-                        name of check file to save the model
-  --save_freq SAVE_FREQ
-                        frequency to save the model
+  --save_model_dir SAVE_MODEL_DIR
+                        directory to save the model
   --list_of_phases LIST_OF_PHASES [LIST_OF_PHASES ...]
                         map graph to phase, start from 0 to n-1
+  --save_loss_freq SAVE_LOSS_FREQ
+                        frequency to save the loss
+  --save_model_freq SAVE_MODEL_FREQ
+                        frequency to save the model
+  --max_save MAX_SAVE   maximum number of checkpoints to keep
+  --show_loss SHOW_LOSS
+                        Show loss on the screen
+  --use_bias USE_BIAS   use bias in the model
+  --size_factor SIZE_FACTOR
+                        increase/decrease dimensionality of hidden features
+                        layer by layer of GNN/MLP
+  --kernel_network KERNEL_NETWORK [KERNEL_NETWORK ...]
+                        filter generating network size and hidden dimensions
+                        graph
+  --ecc_layers ECC_LAYERS
+                        number of edge-conditioned convolutional layer
+  --pool_type POOL_TYPE
+                        type of pooling: sum, attn_sum, avg, attn_avg
+  --activation ACTIVATION
+                        activation function of layers: relu, tanh, ...
+  --mlp_layers MLP_LAYERS
+                        number of mlp layers after pooling
+  --log_name LOG_NAME   write losses to this file
 ```
 
 *Example*
+Training
 ```
-python main.py --list_of_graphs graph_Icehvapor_low_high_24.npz graph_Icehvapor_low_high_30.npz graph_Icehvapor_low_high_21.npz --list_of_phases 0 1 0 --dataset_size 21000 --batch_size 64 --learning_rate 0.0001 --epochs 5000 --data_path <dir> --save_freq 200
+python main.py --list_of_graphs graph_Icehvapor_0.70_1.npz graph_Icehvapor_0.70_21.npz graph_Icehvapor_0.70_29.npz graph_Icehvapor_0.70_28.npz --dataset_size 40000 --batch_size 32 --learning_rate 0.00005 --epochs 50000 --list_of_phases 0 0 1 1
 ```
-
+Prediction
+```
+python run.py # We will add further details for making it more user-friendly
+```
