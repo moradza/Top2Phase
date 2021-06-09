@@ -16,15 +16,14 @@ __all__ = ['distance_pbc', 'PeriodicKDTree', 'PeriodicCKDTree']
 
 _TRAJ_KEYS = ['traj_coords', 'lattices', 'nbr_lists', 'nbr_dists']
 
-
-################################################################################
+###############################################################################
 # LOAD DATA
 ################################################################################
-class MyDataset(Dataset):
+class Top2PhaseDataset(Dataset):
     """
     dataset loader for graph neural network training
     """
-    def __init__(self, n_samples, list_of_graphs, permute=True, rseed=12345, download_bool=False,data_path=None,max_neighs=None, **kwargs):
+    def __init__(self, n_samples, list_of_graphs, permute=True, rseed=12345, download_bool=False,data_path=None,max_neighs=16, **kwargs):
         '''
         initilize loader
         args :
@@ -63,7 +62,7 @@ class MyDataset(Dataset):
         Dataset.path = self.data_path
 
     def read(self):
-        #self.download()
+        #later implement graph dataset existence
         np.random.seed(self.rseed)
         list_of_graphs = self.list_of_graphs
         graphs = [ ]
@@ -73,7 +72,7 @@ class MyDataset(Dataset):
         num_per_phase = int(self.n_samples/ number_of_graphs)
         for phase in range(len(list_of_graphs)):
             for phase_graph in range(len(list_of_graphs[phase])):
-                # Check if the graph file requested exists in the directory
+                # Check if graph file exists in the data path
                 if Dataset.path is None:
                     dataset = np.load(list_of_graphs[phase][phase_graph])
                 else:
@@ -101,12 +100,7 @@ class MyDataset(Dataset):
                             e = data.reshape((data.shape[0],data.shape[1],1))
                     else:
                         e = data.reshape((data.shape[0],data.shape[1],1))
-                    #else:
-                    e = e.reshape((e.shape[0],e.shape[1],1))
-                    #print(e[:3,0,0])
-                    #if self.permute:
-                    #    e = np.concatenate([e,np.random.uniform(0.9,1.1,1)*e],axis=-1)
-                    #    e = e.reshape((e.shape[0],e.shape[0],2))
+                    #e = e.reshape((e.shape[0],e.shape[1],1))
 
                     # Node features
                     x = np.zeros((e.shape[0],2))
@@ -130,6 +124,7 @@ class MyDataset(Dataset):
                     a_i = 0
         num_l =  np.random.permutation(len(graphs))
         return [graphs[i] for i in num_l]
+
 
 def split_traj_files(traj_fname, split_dir, n_splits, zip=False):
     """split the trajectories data into specified number of parts"""
