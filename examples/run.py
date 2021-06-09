@@ -1,6 +1,9 @@
-from utils import *
-from model import *
-from top2phase import *
+from Top2Phase.utils import Top2PhaseDataset
+from Top2Phase.model import PhaseModel
+from Top2Phase.top2phase import Top2Phase
+from spektral.transforms.normalize_adj import NormalizeAdj
+#from Top2Phase.utils import *
+import tensorflow as tf
 
 tf.keras.backend.set_floatx('float32')
 

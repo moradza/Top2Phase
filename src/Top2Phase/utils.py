@@ -11,6 +11,7 @@ import timeit
 import requests
 from zipfile import ZipFile
 from tqdm import tqdm
+from spektral.transforms.normalize_adj import NormalizeAdj
 
 __all__ = ['distance_pbc', 'PeriodicKDTree', 'PeriodicCKDTree']
 
