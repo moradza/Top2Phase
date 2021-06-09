@@ -89,9 +89,9 @@ optional arguments:
 
 *Example*
 ```
- for i in $(seq 1 31); do python compute_pairwisedistance.py --xtc_file Iceh_vapor/temp_${i}_short.xtc  --gro_file Iceh_vapor/conf.gro --radius 0.60 --npz_file graph_Icehvapor_0.40_${i}.npz; done
+ for i in $(seq 1 31); do python compute_pairwisedistance.py --xtc_file Iceh_vapor/temp_${i}_short.xtc  --gro_file Iceh_vapor/conf.gro --radius 0.60 --npz_file graph_Icehvapor_0.60_${i}.npz; done
  
-  for i in $(seq 1 31); do python compute_orderparameters.py --xtc_file Iceh_vapor/temp_${i}_short.xtc  --gro_file Iceh_vapor/conf.gro --radius 0.60 --npz_file graph_Icehvapor_0.40_${i}.npz; done
+  for i in $(seq 1 31); do python compute_orderparameters.py --xtc_file Iceh_vapor/temp_${i}_short.xtc  --gro_file Iceh_vapor/conf.gro --radius 0.60 --npz_file OP_Icehvapor_0.60_${i}.npz; done
 ```
 
 
