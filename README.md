@@ -103,7 +103,7 @@ optional arguments:
 
 ### Graph Neural Network Training
 ```
-python main.py -h
+top2phase -h
 usage: ECCConv net training for phase classification [-h]
                                                       [--list_of_graphs LIST_OF_GRAPHS [LIST_OF_GRAPHS ...]]
                                                       [--dataset_size DATASET_SIZE]
@@ -178,7 +178,7 @@ optional arguments:
 *Example*
 Training
 ```
-python main.py --list_of_graphs graph_Icehvapor_0.70_1.npz graph_Icehvapor_0.70_21.npz graph_Icehvapor_0.70_29.npz graph_Icehvapor_0.70_28.npz --dataset_size 40000 --batch_size 32 --learning_rate 0.00005 --epochs 50000 --list_of_phases 0 0 1 1
+top2phase --list_of_graphs graph_Icehvapor_0.70_1.npz graph_Icehvapor_0.70_21.npz graph_Icehvapor_0.70_29.npz graph_Icehvapor_0.70_28.npz --dataset_size 40000 --batch_size 32 --learning_rate 0.00005 --epochs 50000 --list_of_phases 0 0 1 1
 ```
 Prediction
 ```
