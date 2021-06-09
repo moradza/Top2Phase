@@ -59,7 +59,7 @@ Python codes are located in the src/. directory:
 ### Graph Neural Network Training
 ```
 python main.py -h
-usage: ECCConv net training  for phase classification [-h]
+usage: ECCConv net training for phase classification [-h]
                                                       [--list_of_graphs LIST_OF_GRAPHS [LIST_OF_GRAPHS ...]]
                                                       [--dataset_size DATASET_SIZE]
                                                       [--learning_rate LEARNING_RATE]
