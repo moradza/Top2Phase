@@ -35,6 +35,7 @@ class Top2PhaseDataset(Dataset):
         self.data_path = data_path
         self.permute = permute
         self.max_neighs = max_neighs
+        # Add global path in the future to avoid duplicate dataset: ~/.spektral/dataset/ICE
         if not download_bool:
            Dataset.path = os.path.join(os.getcwd(),'data')
         super().__init__(**kwargs)
