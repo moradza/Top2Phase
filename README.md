@@ -53,6 +53,47 @@ Python codes are located in the src/. directory:
 
 ### Trajectory to Graph
 
+```
+ python compute_pairwisedistance.py -h
+usage: The traj.xtc convertor to npz [-h] [--xtc_file XTC_FILE]
+                                     [--gro_file GRO_FILE]
+                                     [--npz_file NPZ_FILE] [--radius RADIUS]
+                                     [--skip SKIP]
+
+optional arguments:
+  -h, --help           show this help message and exit
+  --xtc_file XTC_FILE  path to the xtc file
+  --gro_file GRO_FILE  path to gro file
+  --npz_file NPZ_FILE  path to save pairwise distance as a npz file
+  --radius RADIUS      radius for neigh list
+  --skip SKIP          skip frames
+```
+
+
+```
+ python compute_orderparameters.py -h
+usage: The traj.xtc convertor to order parameter npz [-h] [--xtc_file XTC_FILE]
+                                     [--gro_file GRO_FILE]
+                                     [--npz_file NPZ_FILE] [--radius RADIUS]
+                                     [--skip SKIP]
+
+optional arguments:
+  -h, --help           show this help message and exit
+  --xtc_file XTC_FILE  path to the xtc file
+  --gro_file GRO_FILE  path to gro file
+  --npz_file NPZ_FILE  path to save orderparameters as a npz file
+  --radius RADIUS      radius for neigh list
+  --skip SKIP          skip frames
+
+```
+
+*Example*
+```
+ for i in $(seq 1 31); do python compute_pairwisedistance.py --xtc_file Iceh_vapor/temp_${i}_short.xtc  --gro_file Iceh_vapor/conf.gro --radius 0.60 --npz_file graph_Icehvapor_0.40_${i}.npz; done
+ 
+  for i in $(seq 1 31); do python compute_orderparameters.py --xtc_file Iceh_vapor/temp_${i}_short.xtc  --gro_file Iceh_vapor/conf.gro --radius 0.60 --npz_file graph_Icehvapor_0.40_${i}.npz; done
+```
+
 
 
 
