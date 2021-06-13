@@ -1,7 +1,7 @@
 
 # Topological Phase Calssification of Water
 
-This package (Top2Phase) implements the graph neural network for classificaiton of water phases, it constructes graphs based on the positioanal information of neighboring water molecules obtained from molecular dynamics trajectories and train graph neural network model to classify these phase using only edge information.
+This package (Top2Phase) implements the graph neural network for classificaiton of water phases, it constructs graphs based on the positioanal information of neighboring water molecules obtained from molecular dynamics trajectories and train graph neural network model to classify these phase using only edge information.
 
 For further information see following paper.
 [Top2Phase](https://doi.org)
