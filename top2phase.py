@@ -42,7 +42,8 @@ class Top2Phase:
         if num_classes > 2:
             self.loss_fn = tf.keras.losses.CategoricalCrossentropy(from_logits=True)
             #self.accuracy = tf.keras.metrics.CategoricalAccuracy(name='Categorical_accuracy', dtype=None) 
-            #self.train_accuracy = tf.keras.metrics.CategoricalAccuracy(name='train_accuracy') 
+            self.train_accuracy = tf.keras.metrics.CategoricalAccuracy(name='train_accuracy',dtype=None) 
+            self.val_accuracy = tf.keras.metrics.CategoricalAccuracy(name='val_accuracy',dtype=None)
         else:
             self.loss_fn = tf.keras.losses.BinaryCrossentropy(from_logits=True)
             #self.accuracy = tf.keras.metrics.BinaryAccuracy(name='Binary_accuracy', threshold=0.0)
@@ -60,7 +61,7 @@ class Top2Phase:
         self.save_model_freq = save_model_freq
         self.save_loss_freq = save_loss_freq
         self.show_loss = show_loss
-    
+ 
     def predict(self, data_loader):
         assert isinstance(data_loader, BatchLoader)
         # restore model
@@ -74,11 +75,11 @@ class Top2Phase:
         y_truth = []
         cur_batch = 0
         for batch in data_loader:
-            y_pred.extend(self.model(batch[0]).numpy())
+            y_pred.extend(self.model(batch[0], training=False).numpy())
             y_truth.extend(batch[1])
+            cur_batch += 1
             if cur_batch == data_loader.steps_per_epoch:
                 break
-            cur_batch += 1
         y_pred = np.array(y_pred)
         y_truth = np.array(y_truth)
         return y_pred, y_truth
@@ -100,17 +101,14 @@ class Top2Phase:
         cur_batch = 0
         for batch in data_loader:
             inputs, target = batch
-            predictions = self.model(inputs, training=False)
+            predictions = self.model(inputs, training=True)
             v_loss = self.loss_fn(target, predictions)
             self.val_loss(v_loss)
             self.val_accuracy(target, predictions)
             cur_batch += 1
             if cur_batch == data_loader.steps_per_epoch:
                 break
-        #model_loss /= data_loader.steps_per_epoch
-        #model_acc /= data_loader.steps_per_epoch 
-        #return model_loss, model_acc
-
+        
     def train(self):
         @tf.function(input_signature=self.loader_tr.tf_signature(), experimental_relax_shapes=True)
         def train_step(inputs, target):
@@ -126,7 +124,6 @@ class Top2Phase:
             self.train_accuracy(target, predictions)
 
         cur_batch = 0
-        tr_loss, tr_acc = 0.0, 0.0
         cur_epoch = 0
         self.ckpt.restore(self.manager.latest_checkpoint)
         if self.manager.latest_checkpoint:
@@ -140,13 +137,7 @@ class Top2Phase:
         self.val_accuracy.reset_states()
 
         for batch in self.loader_tr:
-            #self.train_loss.reset_states()
-            #train_accuracy.reset_states()
-            #self.val_loss.reset_states()
-            #test_accuracy.reset_states()
             train_step(*batch)
-            #tr_loss += outs[0].numpy()
-            #tr_acc += outs[1].numpy()
             cur_batch += 1
             if cur_batch == self.loader_tr.steps_per_epoch:
                 cur_batch = 0
@@ -167,15 +158,4 @@ class Top2Phase:
                 self.val_accuracy.reset_states()
                 if int(self.ckpt.step) % self.save_model_freq  == 0:
                     save_path = self.manager.save()
-                #    val_loss, val_acc =  self.evaluate(self.loader_val)
-                #    tr_loss /= self.loader_tr.steps_per_epoch
-                #    tr_acc /= self.loader_tr.steps_per_epoch
-                #if int(self.ckpt.step) % self.save_loss_freq == 0 :
-                #    self.write_loss(self.train_loss.result(), self.train_accuracy.result(),\
-                #                self.val_loss.result(), self.val_accuracy.result())
-                #if self.show_loss:
-                #        print('epoch: ' + str(int(self.ckpt.step)) + \
-                #                         ' , train loss: ' + str(tr_loss) + ' , train acc: ' + str(tr_acc) +\
-                #                         ' , val loss: ' + str(val_loss.numpy()) + ' , val acc: ' + str(val_acc.numpy()))
-                #tr_loss , tr_acc = 0.0 , 0.0
                 self.ckpt.step.assign_add(1)

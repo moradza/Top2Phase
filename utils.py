@@ -15,7 +15,7 @@ class Top2PhaseDataset(Dataset):
     """
     dataset loader for graph neural network training
     """
-    def __init__(self, n_samples, list_of_graphs, permute=True, rseed=12345, download_bool=False,data_path=None,max_neighs=16, **kwargs):
+    def __init__(self, n_samples, list_of_graphs, permute=True, rseed=12345, download_bool=False,data_path=None,max_neighs=28, **kwargs):
         '''
         initilize loader 
         args :
@@ -73,7 +73,7 @@ class Top2PhaseDataset(Dataset):
                 cnt_sample = 0
                 data = []
                 names = []
-                frame_i = 0
+                frame_i = 1
                 def read_atom(name=None, dataset=dataset):
                     #print("name : " ,name)
                     data = dataset[name]
@@ -86,12 +86,12 @@ class Top2PhaseDataset(Dataset):
                             y_ = [phase]
                     #if self.permute:
                     if not self.max_neighs is None :
-                        if data.shape[0] >= 16:
-                            e = data[:16,:16].reshape((16, 16,1))
+                        if data.shape[0] >= self.max_neighs:
+                            e = data[:self.max_neighs,:self.max_neighs,:].reshape((self.max_neighs, self.max_neighs,4))
                         else:
-                            e = data.reshape((data.shape[0],data.shape[1],1))
+                            e = data.reshape((data.shape[0],data.shape[1],4))
                     else:
-                        e = data.reshape((data.shape[0],data.shape[1],1))
+                        e = data.reshape((data.shape[0],data.shape[1],4))
                     #e = e.reshape((e.shape[0],e.shape[1],1))
                      
                     # Node features

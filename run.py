@@ -1,13 +1,29 @@
 from utils import *
 from model import *
 from top2phase import *
+from gnnexplainer import *
 
-tf.keras.backend.set_floatx('float32')
+tf.keras.backend.set_floatx('float64')
 
-dataset = Top2PhaseDataset(1024*6, [['graph_Icehvapor_0.70_21.npz'], ['graph_Icehvapor_0.70_29.npz']],permute=False,  transforms=NormalizeAdj())
+dataset = Top2PhaseDataset(2000, [['graph_Icehvapor_0.70_5.npz'], ['graph_Icehvapor_0.70_21.npz']],permute=True,  transforms=NormalizeAdj())
 
-loader_tr = BatchLoader(dataset, batch_size=64, epochs=1000)                                                                                          
-loader_te =  BatchLoader(dataset, batch_size=64, epochs=None)
+loader_tr = BatchLoader(dataset, batch_size=2, epochs=1)                                                                                          
+
+#loader_te =  BatchLoader(dataset, batch_size=2, epochs=None)
+for b in loader_tr:
+    inputs, t = b
+
+model = PhaseModel()
+top2phase = Top2Phase(model, loader_tr, loader_tr, 0.00005, 2)
+top2phase.ckpt.restore(top2phase.manager.latest_checkpoint)
+ 
+gnnexplainer= GNNExplainer(top2phase.model,preprocess=NormalizeAdj(),learning_rate=0.01, a_size_coef=0.02, a_entropy_coef=0.0002, x_size_coef=0.0, x_entropy_coef=0.0)
+x, y = gnnexplainer.explain_node(inputs[0][0].reshape((-1,inputs[0][0].shape[0],2)), inputs[1][0].reshape((1,inputs[1].shape[1],inputs[1].shape[1])),inputs[2][0].reshape((1,inputs[2].shape[1],inputs[2].shape[1],1)),epochs=20000) 
+
+x = tf.nn.sigmoid(x)
+
+
+
 #from model import *
 #from top2phase import *
 #model = PhaseModel()
